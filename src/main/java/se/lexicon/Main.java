@@ -12,46 +12,51 @@ public class Main {
 
     private static boolean MenuPrompt() {
         while (true) {
-            System.out.print("\n[r] Repeat this exercise  |  [m] Return to menu: ");
+            System.out.printf("%n[r] Repeat this exercise  |  [m] Return to menu: ");
             String choice = SCANNER.nextLine().trim().toLowerCase();
-            if (choice.equals("r")) return true;   // repeat
-            if (choice.equals("m")) return false;  // back to menu
-            System.out.println("Press R to repeat exercise, or M for main menu");
+            if (choice.equals("r")) return true;
+            if (choice.equals("m")) return false;
+            System.out.printf("%n[r] Repeat this exercise  |  [m] Return to menu: .%n");
         }
     }
 
     static void getUsername() {
-        System.out.println("Enter your name");
+        System.out.printf("Enter username: ");
         usernameInput = SCANNER.nextLine();
-        System.out.println("Your name is Dennis " + usernameInput);
+        System.out.printf("Your Username is %s%n", usernameInput);
     }
     static void runExercise(int exerciseNumber) {
         boolean repeat;
         do {
-            System.out.println("\nExercise " + exerciseNumber + " ");
+            System.out.printf("%nExercise %d - ", exerciseNumber);
             switch (exerciseNumber) {
                 case 1 -> {
-                    System.out.println("What is my name?");
-                    System.out.println("Your name is Dennis");
+                    System.out.printf("'What is my name?'%n");
+                    System.out.printf("Hello!%n");
+                    System.out.printf("Your name is Dennis%n");
                 }
                 case 2 -> {
-                    System.out.println("Leap year check");
-                    System.out.print("Enter a year: ");
+                    System.out.printf("Leap year check%n");
+                    System.out.printf("Enter a year: ");
                     int inputYear = SCANNER.nextInt();
                     SCANNER.nextLine();
                     if ((inputYear % 4 == 0 && inputYear % 100 != 0) || (inputYear % 400 == 0)) {
-                        System.out.println("\n " + inputYear + " + is a leap year.");
+                        System.out.printf("%nYear %d is a leap year.%n", inputYear);
                     } else {
-                        System.out.println("\n " + inputYear + " is not a leap year.");
+                        System.out.printf("%nYear %d is not a leap year.%n", inputYear);
                     }
-                    System.out.println("\nSummary of Rules:\r\n" + //
-                            "A year is a leap year if it meets the following condition: \r\n" + //
-                            "\r\n" + //
-                            ">It is divisible by 4 AND not divisible by 100\r\n" + //
-                            ">OR it is divisible by 400.");
+
+                    System.out.printf(
+                    "Leap year rules use these conditions:%n%n" +
+                    "\"It is divisible by 4 AND not divisible by 100.%n" +
+                    "OR it is evenly divisible by 400.\"%n"
+                    );
+                    System.out.printf("%d / 4 = %.2f%n",   inputYear, inputYear / 4f);
+                    System.out.printf("%d / 100 = %.2f%n", inputYear, inputYear / 100f);
+                    System.out.printf("%d / 400 = %.2f%n", inputYear, inputYear / 400f);
                 }
                 case 3 -> {
-                    System.out.println("calc print");
+                    System.out.printf("Simple calculations%n%n");
                     int result1 = 45 + 11;
                     System.out.printf("45 + 11 = %d%n", result1);
                     int result2 = 12 * 4;
@@ -62,47 +67,53 @@ public class Main {
                     System.out.printf("10 - 3 = %d%n", result4);
                 }
                 case 4 -> {
-                    System.out.println("Average of 3 numbers.");
-                    System.out.print("Enter first number: ");
-                    int num1 = SCANNER.nextInt();
-                    System.out.print("Enter second number: ");
-                    int num2 = SCANNER.nextInt();
-                    System.out.print("Enter third number: ");
-                    int num3 = SCANNER.nextInt();
-                    SCANNER.nextLine();
+                    System.out.printf("Average of 3 numbers.%n");
 
-                    double average = (num1 + num2 + num3) / 3.0;
-                    System.out.println("Average: " + average);
+                    int[] numbs = new int[3];
+                    int count = 0;
+
+                    while (count < 3) {
+                        System.out.printf("%nEnter number %d: ", (count + 1));
+                        String line = SCANNER.nextLine();
+                        numbs[count] = Integer.parseInt(line);
+                        count++;
+                    }
+                    int sum = numbs[0] + numbs[1] + numbs[2];
+                    double average = (double) sum / count;
+                    double avgRounded = Math.round(average * 100.0) / 100.0;
+                    System.out.printf("%nThe average of %d, %d, and %d is: %.2f%n", numbs[0], numbs[1], numbs[2], avgRounded);
                 }
                 case 5 -> {
-                    System.out.println("Username Input");
+                    System.out.printf("Username Input%n");
                     if (usernameInput == null || usernameInput.isBlank()) {
                         getUsername();
                     }
-                    System.out.println("Hello, " + usernameInput + "!");
+                    System.out.printf("Hello %s%n%n", usernameInput);
                 }
                 case 6 -> {
-                    System.out.println("Sum, mult., div., sub.");
+                    System.out.printf("subtraction, addition, multiplication, division.%n");
 
-                    System.out.print("Enter first number: ");
+                    System.out.printf("Enter first number: ");
                     int number1 = SCANNER.nextInt();
 
-                    System.out.print("Enter second number: ");
+                    System.out.printf("Enter second number: ");
                     int number2 = SCANNER.nextInt();
                     SCANNER.nextLine();
 
                     int subtraction = number1 - number2;
                     int sum = number1 + number2;
                     int multiplication = number1 * number2;
-                    float division = (float) number1 / (float) number2;
+                    double division = (double) number1 / (double) number2;
+                    double divRounded = Math.round(division * 100.0) / 100.0;
 
-                    System.out.printf(
-                            "sub = " + subtraction + ", " + "sum = " + sum + ", " + "mult = " + multiplication + ", " + "div = " + division
-                    );
+                    System.out.printf("%d - %d = %d%n", number1, number2, subtraction);
+                    System.out.printf("%d + %d = %d%n", number1, number2, sum);
+                    System.out.printf("%d * %d = %d%n", number1, number2, multiplication);
+                    System.out.printf("%d / %d = %.2f%n%n", number1, number2, divRounded);
                 }
                 case 7 -> {
-                    System.out.println("Convert seconds to hours, minutes, and seconds.");
-                    System.out.print("Enter total seconds: ");
+                    System.out.printf("Convert seconds to hours, minutes, and seconds.%n");
+                    System.out.printf("Enter total seconds: ");
 
                     long totalSeconds = SCANNER.nextLong();
                     SCANNER.nextLine();
@@ -111,44 +122,64 @@ public class Main {
                     long remainingSeconds = (totalSeconds % 3600);
                     long minutes = remainingSeconds / 60;
                     long seconds = remainingSeconds % 60;
-
-                    System.out.printf("%d:%02d:%02d%n", hours, minutes, seconds);
+                    System.out.printf("%n%d seconds is equal to:%n", totalSeconds);
+                    System.out.printf("%dh %dm %ds%n", hours, minutes, seconds);
                 }
                 case 8 -> {
-                    System.out.println("Rand guesser.");
+                    System.out.printf("Random Guesser.%n");
                     Random random = new Random();
                     int randomNumber = random.nextInt(501);
-                    int hint = randomNumber - 1;
-                    System.out.println("hint: its close to " + hint + " ");
-                    int guess = SCANNER.nextInt();
-                    SCANNER.nextLine();
-                    while (guess != randomNumber) {
-                        System.out.println("Wrong guess, try again:");
-                        guess = SCANNER.nextInt();
+
+                    int attempts = 0;
+                    boolean hintShown = false;
+
+                    while (true) {
+                        System.out.printf("Guess a number between 0 and 500: ");
+
+                        int guess = SCANNER.nextInt();
+                        attempts++;
+
+                        if (guess == randomNumber) {
+                            System.out.printf("Correct! The number was: %d. Attempts: %d%n", randomNumber, attempts);
+                            break;
+                        }
+
+                        if (guess < randomNumber) {
+                            System.out.printf("Higher%n");
+                        } else {
+                            System.out.printf("Lower%n");
+                        }
+
+                        if (attempts >= 3 && !hintShown) {
+                            System.out.printf("Hint: %d is close%n", (randomNumber - 1));
+                            hintShown = true;
+                        }
                     }
-                    System.out.println("Correct! The number was: " + randomNumber);
+                    System.out.printf("%n");
+                    SCANNER.nextLine();
+
                 }
-                default -> System.out.println("Exercise not implemented.");
+                default -> System.out.printf("Exercise not implemented.%n");
             }
             repeat = MenuPrompt();
         } while (repeat);
     }
-    public static void main(String[] args) {
+    static void main() {
         boolean running = true;
         while (running) {
-            System.out.println("\nAvailable Exercises");
+            System.out.printf("%nAvailable Exercises%n");
             for (int i = 1; i <= EXERCISE_COUNT; i++) {
-                System.out.println(i + " - Exercise " + i);
+                System.out.printf("%d - Exercise %d%n", i, i);
             }
-            System.out.println("0 - Exit");
-            System.out.print("Choose an exercise to run: ");
+            System.out.printf("0 - Exit%n");
+            System.out.printf("Choose an exercise to run: ");
 
             String input = SCANNER.nextLine().trim();
             int choice;
             try {
                 choice = Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number.");
+                System.out.printf("Please enter a valid number.%n");
                 continue;
             }
 
@@ -157,10 +188,10 @@ public class Main {
             } else if (choice >= 1 && choice <= EXERCISE_COUNT) {
                 runExercise(choice);
             } else {
-                System.out.println("Invalid selection: " + choice);
+                System.out.printf("Invalid selection: %d%n", choice);
             }
         }
-        System.out.println("Goodbye!");
+        System.out.printf("Goodbye!%n");
     }
 }
     
